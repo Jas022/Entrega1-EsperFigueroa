@@ -1,6 +1,5 @@
-const fs = require("fs");
-class ProductManager {
-  // #products;
+import fs from "fs";
+export class ProductManager {
   #path;
 
   constructor(path) {
@@ -91,35 +90,4 @@ class ProductManager {
   }
 }
 
-module.exportsno = ProductManager;
-
-// const pm = new ProductManager();
-// console.log(pm.getProducts());
-
-// const product1 = {
-//   title: "Maceta",
-//   description: "Maceta blanca con flores",
-//   price: 2000,
-//   thumbnail: "image",
-//   code: "01",
-//   stock: 10,
-// };
-
-// const product2 = {
-//   title: "Florero",
-//   description: "Florero cerámica",
-//   price: 2500,
-//   thumbnail: "image",
-//   code: "02",
-//   stock: 10,
-// };
-
-// pm.addProduct(product1);
-// pm.addProduct(product2);
-// pm.addProduct("Reloj", "Reloj de pared", 2000, "image", "02", 10); //producto para agregar
-
-// //pruebas de en consola
-// console.log(pm.getProducts());
-// console.log(pm.getProductById(1));
-// console.log(pm.getProductById(500));
-// console.log(pm.addProduct("Maceta"));
+// module.exports = ProductManager;
