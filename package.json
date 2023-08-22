@@ -5,9 +5,11 @@
   },
   "name": "back",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/app.js",
   "devDependencies": {},
   "scripts": {
+    "start": "node .",
+    "dev": "nodemon .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

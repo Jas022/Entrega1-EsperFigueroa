@@ -1,5 +1,5 @@
 // import ProductManager from "./productManager.js";
-import ProductManager from "./productManager.js";
+import ProductManager from "./src/productManager";
 
 const mockProduct = {
   title: "Producto prueba",
