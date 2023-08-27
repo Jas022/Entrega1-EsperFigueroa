@@ -51,7 +51,7 @@ export class ProductManager {
     let data = await fs.promises.readFile(this.#path, "utf-8");
     let products = JSON.parse(data);
     let product = products.find((item) => item.id === id);
-    if (!product) return "[ERR] NOt found";
+    if (!product) return "[ERR] NOT found";
     return product;
   }
   async updateProduct(id, updateProduct) {
@@ -76,17 +76,35 @@ export class ProductManager {
     return newProducts.find((item) => item.id === id);
   }
   async deleteProduct(id) {
-    if (!fs.existsSync(this.#path)) return "[ERR] DB File does not exists";
-    let isFound = false;
-    let data = await fs.promises.readFile(this.#path, "utf-8");
-    let products = JSON.parse(data);
-    let newProducts = products.filter((item) => item.id !== id);
-    if (!isFound) return "[ERR] DB Product does not exists";
-    await fs.promises.writeFile(
-      this.#path,
-      JSON.stringify(newProducts, null, 2)
-    );
-    return newProducts;
+    try {
+      let file = await fs.promises.readFile(this.path, "utf8");
+      if (file) {
+        const products = JSON.parse(file);
+        const rest = products.filter((prod) => prod.id !== id);
+        if (rest.length) {
+          try {
+            await fs.promises.writeFile(
+              this.path,
+              JSON.stringify(rest, null, 2)
+            );
+            return `Se elimino el objeto con el id: ${id}`;
+          } catch (err) {
+            console.log("Hubo un error de escritura", err);
+          }
+        } else this.deleteAll();
+      }
+    } catch (err) {
+      console.log("Hubo un error de lectura", err);
+    }
+  }
+
+  async deleteAll() {
+    try {
+      await fs.promises.writeFile(this.path, "");
+      console.log("Todos los productos fueron eliminados");
+    } catch (err) {
+      console.log("Hubo un error al intentar obtener el archivo", err);
+    }
   }
 }
 
